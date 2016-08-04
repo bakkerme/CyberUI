@@ -3,6 +3,7 @@ A Leap Motion based futuristic UI demo. Currently, the only functionality availa
 
 ## Running
 `npm install`
+
 `npm start`
 
 Built using Leap Motion v2 library, unsure if Orion works, but I don't see why not.
