@@ -1,0 +1,310 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,700,300);
+
+html, body {
+	margin: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(#20313c 40%,black);
+
+    font-family: 'Roboto Mono';
+}
+
+body.ready {
+    visibility: visible !important;
+}
+
+#appContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+body.ready #appContainer {
+    animation: turn-on 2s linear;
+    animation-fill-mode:forwards;
+}
+
+.cursor {
+	width: 40px;
+    height: 40px;
+    margin: -20px -20px;
+    border-radius: 100%;
+    border: 5px solid #326467;
+    background: radial-gradient(#009bff,#2b9090);
+    opacity: .4;
+
+    transition: transform .1s ease;
+
+    position: relative;
+    z-index: 3;
+}
+
+
+.cursor .cursor-gripped {
+	opacity: 0;
+}
+
+.cursor.gripped .cursor-gripped {
+	opacity: 1;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: radial-gradient(#ef0101 32%,#bb0c0c);
+    border-radius: 100%;
+    border: 5px solid #326467;
+
+    top: -5px;
+    left: -5px;
+
+    transition: opacity .5s ease;
+}
+
+
+.manipulatable {
+    background: radial-gradient(rgba(0, 155, 255, 0.17),rgba(43, 144, 144, 0.25));
+    border-radius: 100%;
+    transition: transform .1s ease;
+    border: 2px solid rgba(0, 206, 255, 0.28);
+
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    animation: pulse 4s infinite; 
+    animation-direction: alternate;
+}
+
+.manipulatable span {
+    font-size: 13px;
+    color: #3dbdff;
+    display: block;    
+    margin-top: -7px;
+}
+
+.manipulatable.fadeOut {
+   animation: fadeOut 1s; 
+   animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0px 0px 0px 0px #3dbdff;
+    }
+    100% {
+        box-shadow: 0px 0px 30px -4px #3dbdff;
+    }
+}
+
+.target.dropState {
+    color:#ef0101;
+    background: linear-gradient(0deg, transparent 0px, rgba(239, 1, 1, 0.51) 0) top left, linear-gradient(0deg, transparent 0px, rgba(239, 1, 1, 0.51) 0) top right, linear-gradient(315deg, transparent 10px, rgba(239, 1, 1, 0.51) 0) bottom right, linear-gradient(0deg, transparent 0px, rgba(239, 1, 1, 0.51) 0) bottom left;
+}
+
+.box {
+    color: #3dbdff;
+    position: absolute;
+    font-weight: bold;
+    width: 170px;
+    background: linear-gradient(0deg, transparent 0px, rgb(6, 131, 160) 0) top left, linear-gradient(0deg, transparent 0px, rgb(6, 131, 160) 0) top right, linear-gradient(315deg, transparent 10px, rgb(6, 131, 160) 0) bottom right, linear-gradient(0deg, transparent 0px, rgb(6, 131, 160) 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 1px;
+    filter: drop-shadow(2px 2px 2px rgba(0, 161, 237, 0.25));
+    z-index: 1;
+}
+
+.box .boxInner {
+    padding: 20px;
+    background: linear-gradient(0deg, transparent 0px, #000 0) top left, linear-gradient(0deg, transparent 0px, #000 0) top right, linear-gradient(315deg, transparent 10px, #000 0) bottom right, linear-gradient(0deg, transparent 0px, #000 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+
+#debug {
+    top: 60px;
+    left: 60px;
+    width: 184px;
+    height: 142px;
+    font-size: 11px;
+}
+
+.debug-row {
+	padding-left: 30px;
+    margin-bottom: 3px;
+    display: block;
+}
+
+.scanLines {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+  /*** WEBKIT ***/
+  background: -webkit-repeating-linear-gradient(
+    top,
+    transparent 0px,
+    transparent 4px,
+    rgba(0,0,0,0.25) 4px,
+    rgba(0,0,0,0.25) 8px
+  );
+  -webkit-background-size: 100% 8px;
+
+  /*** MOZILLA ***/
+  background: -moz-repeating-linear-gradient(
+    top,
+    transparent 0px,
+    transparent 4px,
+    rgba(0,0,0,0.25) 4px,
+    rgba(0,0,0,0.25) 8px
+  );
+  -moz-background-size: 100% 8px;
+
+    animation: scanline 1s steps(60) infinite;
+    z-index: 2;
+    opacity: .2;
+}
+
+/* ANIMATE UNIQUE SCANLINE */
+@keyframes scanline {
+    0% {
+        transform: translate3d(0,0px,0);
+    }
+
+    100% {
+        transform: translate3d(0,-10px,0);
+    }
+}
+
+.border {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-top: 1px solid rgb(6, 131, 160);
+    border-left: 1px solid rgb(6, 131, 160);
+}
+
+#border1 {
+    top: 30px;
+    left: 30px;
+}
+
+#border2 {
+    top: 30px;
+    right: 30px;
+    transform: rotate(90deg);
+}
+
+#border3 {
+    bottom: 30px;
+    left: 30px;
+    transform: rotate(270deg);
+}
+
+#border4 {
+    bottom: 30px;
+    right: 30px;
+    transform: rotate(180deg);
+}
+
+
+@keyframes turn-on{
+  0%{
+    transform:scale(1,0.8) translate3d(0,0,0);
+    /*-webkit-filter:brightness(30);*/
+    /*filter:brightness(30);*/
+    opacity:1;
+    transform:translate3d(0,100%,0);
+  }
+  3.5%{
+    transform:scale(1,0.8) translate3d(0,100%,0);
+  }
+  
+  3.6%{
+    transform:scale(1,0.8) translate3d(0,-100%,0);
+    opacity:1;
+  } 
+  
+  9%{
+    /*-webkit-filter:brightness(30);*/
+    /*filter:brightness(30);*/
+    opacity:0;
+  }
+  
+  11%{
+    transform:scale(1,1) translate3d(0,0,0);
+    /*-webkit-filter:contrast(0) brightness(0) ;*/
+    /*filter:contrast(0) brightness(0);*/
+    opacity:0;
+  }
+  
+  100%{
+    transform:scale(1,1) translate3d(0,0,0);
+    /*-webkit-filter:contrast(1) brightness(1.1) saturate(1.1);*/
+    /*filter:contrast(1) brightness(1.1) saturate(1.1);*/
+    opacity:1;
+  }
+}
+
+
+
+#error {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.38);
+    position: absolute;
+    z-index: 100;
+    font-size: 120px;
+    color: red;
+    font-weight: bold;
+    letter-spacing: -13px;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-shadow: 0px 0px 20px red;
+
+    display: none;
+    animation: errorFlicker 3s steps(5);
+    animation-fill-mode:forwards;
+    top: 0;
+}
+
+@keyframes errorFlicker {
+    0% {
+        visibility: visible;
+    }
+    20% {
+        opacity: .7; 
+    }
+    40% {
+        visibility: hidden;
+        opacity: 1; 
+    }
+    70% {
+        visibility: visible;
+    }
+    100% {
+        visibility: hidden;
+    }
+}
