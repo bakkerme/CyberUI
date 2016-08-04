@@ -10,9 +10,12 @@ Built using Leap Motion v2 library, unsure if Orion works, but I don't see why n
 
 ## Attribution
 The UI uses code examples from:
+
 Malcolm White
 http://codepen.io/docwyatt2001/pen/EPRBRP
+
 Mikhail
 http://codepen.io/MrFranke/pen/EaXqja
+
 Aaron Levine
 http://codepen.io/Aldlevine/pen/cBIJf
